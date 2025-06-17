@@ -59,6 +59,6 @@ The World Handicrafts Gallery is a beautifully designed, fully responsive HTML a
 → Social media icons (Facebook, Instagram, Pinterest, Twitter)
 
 ✨ Fully Responsive
-→ Mobile-friendly layout with media queries for different screen sizes.
+  Mobile-friendly layout with media queries for different screen sizes.
 
 
