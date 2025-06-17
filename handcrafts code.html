@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Handicrafts Gallery</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f5f0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #6e45e2, #88d3ce);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #4a2c82;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            background-color: #6e45e2;
+            transform: translateY(-2px);
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 40px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        section h2 {
+            font-size: 2rem;
+            color: #4a2c82;
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, #6e45e2, #88d3ce);
+        }
+        
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-image {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-info h3 {
+            font-size: 1.4rem;
+            color: #4a2c82;
+            margin-bottom: 10px;
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .product-details {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .product-details h4 {
+            color: #4a2c82;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .product-details hr {
+            border: none;
+            border-top: 1px dashed #ccc;
+            margin: 10px 0;
+        }
+        
+        /* Price Tag */
+        .price-tag {
+            background-color: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #4a2c82, #6e45e2);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        footer p {
+            margin-bottom: 10px;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+        }
+        
+        /* Special Highlights */
+        .highlight {
+            background: linear-gradient(135deg, rgba(110,69,226,0.1), rgba(136,211,206,0.1));
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border-left: 5px solid #6e45e2;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, #6e45e2, #88d3ce);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(110,69,226,0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(110,69,226,0.4);
+        }
+        
+        /* Category Badges */
+        .category-badge {
+            display: inline-block;
+            background-color: #88d3ce;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>World Handicrafts Gallery</h1>
+            <p>Discover the beauty of traditional craftsmanship from around the world</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#pottery">Pottery</a></li>
+                <li><a href="#indian-handicrafts">Indian Handicrafts</a></li>
+                <li><a href="#east-asian">East Asian</a></li>
+                <li><a href="#home-living">Home & Living</a></li>
+                <li><a href="#block-printing">Block Printing</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="pottery">
+            <h2>Pottery</h2>
+            <div class="highlight">
+                <p>Pottery is one of the oldest and most widespread forms of craft, known for its beauty and utility. It consists of everyday items like vessels, pots, bowls and plates; generally made from clay and hardened with heat. It also provides therapeutic value to the ones practicing it since it involves creativity and use of hands to shape the art.</p>
+                <a href="#pueblo-pottery" class="cta-button">Explore Pottery</a>
+            </div>
+            
+            <div id="pueblo-pottery" class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\geometric acoma pueblo pot.webp" alt="Geometric Acoma Pueblo Pot">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Pueblo Pottery</span>
+                        <h3>Geometric Acoma Pueblo Pot</h3>
+                        <p>The pottery of Acoma is strongly recognized for its fluted rims, thin walls and geometric design, with orange and black as primary colors.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>clay<hr style="border-top: 1px dotted;">
+                            Craft: <br>Acoma Pueblo Pottery<hr style="border-top: 1px dotted;">
+                            Color: <br>Orange-Black<hr style="border-top: 1px dotted;">
+                            Measurement: <br>0.4m Height-0.2m Width<hr style="border-top: 1px dotted;">
+                            Weight: <br>1.5 kg<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 12,000</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\zuni pueblo southwest indian jar.web.webp" alt="Zuni Pueblo Southwest Indian Jar">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Pueblo Pottery</span>
+                        <h3>Zuni Pueblo Southwest Indian Jar</h3>
+                        <p>Zuni Pueblo pottery, hailing from New Mexico, is made from clay that uses crushed pottery shards or rock to temper it.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>clay<hr style="border-top: 1px dotted;">
+                            Craft: <br>Zuni Pueblo Pottery<hr style="border-top: 1px dotted;">
+                            Color: <br>Black-Red<hr style="border-top: 1px dotted;">
+                            Measurement: <br>Height-0.7m, Width-0.4m <hr style="border-top: 1px dotted;">
+                            Weight: <br>3 kg<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 10,000</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\floral surahi vase.jpg" alt="Jaipur Blue Pottery Vase">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Jaipur Blue Pottery</span>
+                        <h3>Floral Surahi Vase</h3>
+                        <p>This handcrafted Blue Pottery Multicolored Floral Surahi Vase is a delight to add to your place.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Multani Mitti <hr style="border-top: 1px dotted;">
+                            Craft: <br>Jaipur Blue Pottery <hr style="border-top: 1px dotted;">
+                            Color: <br> Blue with Multicolored design <hr style="border-top: 1px dotted;">
+                            Measurement: <br>Height-0.7m, Width-0.5m <hr style="border-top: 1px dotted;">
+                            Weight: <br> 1 kg <hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 3,000</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="indian-handicrafts">
+            <h2>Indian Handicrafts</h2>
+            <div class="highlight">
+                <p>The history of handicrafts in India dates back to 5,000 BC when handmade crafts were primarily centred around religion. Several types of arts and traditional crafts of India that can be seen in modern exhibits date back to the Indus-Valley civilisation.</p>
+                <a href="#sikki-craft" class="cta-button">Explore Indian Crafts</a>
+            </div>
+            
+            <div id="sikki-craft" class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\buddha half chakar banayan leaf face .jpg" alt="Buddha Half Chakra Banayan Leaf Face">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Sikki Grass Craft</span>
+                        <h3>Buddha Half Chakra Banayan Leaf Face</h3>
+                        <p>The artwork is made using natural Golden Grass using traditional technique. The golden color of the plant results in striking appearance.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Sikki Grass, paper as base <hr style="border-top: 1px dotted;">
+                            Craft: <br>Sikki Grass craft <hr style="border-top: 1px dotted;">
+                            Color: <br>Golden<hr style="border-top: 1px dotted;">
+                            Measurement: <br> Length- 15 cm, Width- 20 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 2,500</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\marble plate blue.webp" alt="Marble Inlay Round Plate Pietra Dura">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Marble Craft</span>
+                        <h3>Marble Inlay Round Plate Pietra Dura</h3>
+                        <p>An elegant and beautiful marble inlay round plate curio in white and light blue with stand, adds just that lovely extra touch of class.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Marble <hr style="border-top: 1px dotted;">
+                            Craft: <br>Marble craft <hr style="border-top: 1px dotted;">
+                            Color: <br>White-Light Blue<hr style="border-top: 1px dotted;">
+                            Measurement: <br> Diameter- 25 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 5,000</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\peacock painting madhubani.jpg" alt="Peacock Painting">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Madhubani Art</span>
+                        <h3>Peacock Painting</h3>
+                        <p>The peacock holds a great cultural and mythological significance in India. It is associated with Lord Krishna and is the national bird of India.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Paper <hr style="border-top: 1px dotted;">
+                            Craft: <br>Madhubani Art<hr style="border-top: 1px dotted;">
+                            Color: <br>Multicolored<hr style="border-top: 1px dotted;">
+                            Measurement: <br>Length- 15 cm, Width- 30 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 2,000</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="east-asian">
+            <h2>East Asian Handicrafts</h2>
+            <div class="highlight">
+                <p>East Asian handicrafts encompass a wide range of traditional art forms and crafts originating from countries such as China, Japan, Korea, and others. These crafts often reflect the rich cultural heritage, artistic traditions, and craftsmanship unique to each region.</p>
+                <a href="#chinese-handicrafts" class="cta-button">Explore East Asian Crafts</a>
+            </div>
+            
+            <div id="chinese-handicrafts" class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\traditional lacquerware plate chinese craft.jpg" alt="Traditional Lacquerware Plate">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Chinese Handicrafts</span>
+                        <h3>Traditional Lacquerware Plate</h3>
+                        <p>Radiating a serene lustre, lacquer ware is an exquisite Chinese craft. During the past years, it has played a significant role in the development of Chinese art and craft.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Lacquer <hr style="border-top: 1px dotted;">
+                            Craft: <br>Lacquer ware craft<hr style="border-top: 1px dotted;">
+                            Color: <br>Red-Golden<hr style="border-top: 1px dotted;">
+                            Measurement: <br>Diameter- 15 cm, Height- 4 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 4,000</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\imari arita ware container japness hand craft.jpg" alt="Imari-Arita Ware Container">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Japanese Handicrafts</span>
+                        <h3>Imari-Arita Ware Container</h3>
+                        <p>Imari-Arita ware is made around the town of Arita, in Saga prefecture using White Porcelain. Imari-Arita ware is delicate and lightweight, with an excellent durability.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Porcelain <hr style="border-top: 1px dotted;">
+                            Craft: <br>Imari-Arita Ware <hr style="border-top: 1px dotted;">
+                            Color: <br>Multicolored<hr style="border-top: 1px dotted;">
+                            Measurement: <br> Diamter-19 cm, Height- 4 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 1,000</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\kyoto folding fan.jpg" alt="Kyoto Folding Fan">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Japanese Handicrafts</span>
+                        <h3>Kyoto Folding Fan</h3>
+                        <p>Kyo folding fans are mainly made of carefully selected bamboo and paper. Kyo folding fans are notable for their wide variety of styles.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Bamboo <hr style="border-top: 1px dotted;">
+                            Craft: <br>Kutani Ware <hr style="border-top: 1px dotted;">
+                            Color: <br>Green-Multicolored<hr style="border-top: 1px dotted;">
+                            Measurement: <br>Length- 23 cm, Width- 15 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 1,000</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="home-living">
+            <h2>Home & Living</h2>
+            <div class="highlight">
+                <p>Presenting you a collection of dazzling handcrafted home decor items. These are made with keeping their functional utility in mind. These are also considerately crafted to accomodate to need for durability, comfort and visual appeal.</p>
+                <a href="#lighting" class="cta-button">Explore Home Decor</a>
+            </div>
+            
+            <div id="lighting" class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\pineapple shaped solar lantern.avif" alt="Pineapple Shaped Solar Lantern">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Lighting</span>
+                        <h3>Pineapple Shaped Solar Lantern</h3>
+                        <p>This is a decorative and functional lighting lantern, handcrafted in the shape of a pineapple. This lantern is not only aesthetically pleasing, but also harnesses solar energy for illumination.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Metal wire, Solar energy harnessing material <hr style="border-top: 1px dotted;">
+                            Type of lighting: <br>Lantern<hr style="border-top: 1px dotted;">
+                            Power Source: <br> Solar energy <hr style="border-top: 1px dotted;">
+                            Brightness: <br> Adjustable <hr style="border-top: 1px dotted;">
+                            Color: <br>Golden-Green<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 3,000</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\handwoven macrame dreamcatcher.webp" alt="Handwoven Macrame Dreamcatcher">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Wall Hangings</span>
+                        <h3>Handwoven Macrame Dreamcatcher</h3>
+                        <p>The handmade woven macramé dreamcatcher is a craft item that combines the traditional art of dreamcatcher-making with the intricate and decorative technique of macramé.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Cotton<hr style="border-top: 1px dotted;">
+                            Color: <br>Off-white<hr style="border-top: 1px dotted;">
+                            Measurement: <br>Length- 80 cm, Ring Diameter- 20 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 350</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\glazed leafy mug.webp" alt="Glazed Leafy Mug">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Mugs</span>
+                        <h3>Glazed Leafy Mug</h3>
+                        <p>The "Glazed Leafy Mug" in green and yellow is a stoneware mug featuring a glazed finish and is adorned with leafy patterns.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Stoneware<hr style="border-top: 1px dotted;">
+                            Craft: <br>Stoneware Pottery <hr style="border-top: 1px dotted;">
+                            Color: <br>Green, Yellow<hr style="border-top: 1px dotted;">
+                            Measurement: <br>Length- 12 cm, Width- 8 cm, Height- 11 cm<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 400</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="block-printing">
+            <h2>Hand Block Printing</h2>
+            <div class="highlight">
+                <p>Hand block printing in India is a traditional and intricate textile printing technique that involves the use of wooden blocks to create intricate patterns on fabric. Many hand block prints feature traditional Indian motifs such as paisleys, flowers, animals, and geometric patterns, reflecting the rich cultural heritage.</p>
+                <a href="#dabu-printing" class="cta-button">Explore Block Prints</a>
+            </div>
+            
+            <div id="dabu-printing" class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\maheshwari saree.jpeg" alt="Maheshwari Saree - Yellow">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Dabu Printing</span>
+                        <h3>Maheshwari Saree- Yellow</h3>
+                        <p>A beautifully crafted and stylish saree, blending the traditional Dabu block printing technique with the elegance of Maheshwari weaving.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Maheshwari<hr style="border-top: 1px dotted;">
+                            Craft: <br>Dabu Hand Block Printing <hr style="border-top: 1px dotted;">
+                            Color: <br>Yellow <hr style="border-top: 1px dotted;">
+                            Measurement: <br>Length- 5.5m<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 3,400</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\mulmul cotton saree.webp" alt="Mulmul Cotton Saree - Red Florets">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Bagru Print</span>
+                        <h3>Mulmul Cotton Saree - Red Florets</h3>
+                        <p>A charming, traditional creation, combining the intricate Bagru block printing technique with the comfort of mulmul cotton fabric.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Mulmul<hr style="border-top: 1px dotted;">
+                            Craft: <br>Bagru Hand Block Printing <hr style="border-top: 1px dotted;">
+                            Color: <br>Red-White <hr style="border-top: 1px dotted;">
+                            Measurement: <br>Length- 5.5m<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 2,200</div>
+                    </div>
+                </div>
+                
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="c:\Users\deept\OneDrive\Desktop\handcrafts website\cotton kurta with skirt.webp" alt="Cotton Kurta with Skirt - Blue">
+                    </div>
+                    <div class="product-info">
+                        <span class="category-badge">Bagru Print</span>
+                        <h3>Cotton Kurta with Skirt- Blue</h3>
+                        <p>This Blue cotton kurta with skirt set makes a stylish and traditional ensemble, combining the intricacies of Bagru block printing with the comfort of cotton fabric.</p>
+                        <div class="product-details">
+                            <h4>Product Details</h4>
+                            Material: <br>Cotton<hr style="border-top: 1px dotted;">
+                            Craft: <br>Bagru Hand Block Printing <hr style="border-top: 1px dotted;">
+                            Color: <br>Blue <hr style="border-top: 1px dotted;">
+                            Measurement: <br>Refer size guide<hr style="border-top: 1px dotted;">
+                        </div>
+                        <div class="price-tag">Rs 3,000</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3>World Handicrafts Gallery</h3>
+            <p>Preserving traditional crafts from around the world</p>
+            <p>Contact us: info@handicraftsgallery.com</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <p>&copy; 2023 World Handicrafts Gallery. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
