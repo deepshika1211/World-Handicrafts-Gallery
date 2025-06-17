@@ -29,8 +29,8 @@ The World Handicrafts Gallery is a beautifully designed, fully responsive HTML a
 
 → Hand Block Printing
 
-★ Product Cards
-✨ Each section includes a responsive grid of product cards featuring:
+✨ Product Cards
+Each section includes a responsive grid of product cards featuring:
 
 → High-resolution images
 
