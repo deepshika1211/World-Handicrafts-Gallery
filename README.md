@@ -10,6 +10,7 @@ The World Handicrafts Gallery is a beautifully designed, fully responsive HTML a
 → Font Awesome – For social media and icon support (CDN-based)
 
 ✨ Features
+
 ★ Elegant Landing Page
 → A welcoming hero section with a captivating title and tagline introducing the purpose of the gallery.
 
@@ -30,7 +31,7 @@ The World Handicrafts Gallery is a beautifully designed, fully responsive HTML a
 → Hand Block Printing
 
 ✨ Product Cards
-Each section includes a responsive grid of product cards featuring:
+ Each section includes a responsive grid of product cards featuring:
 
 → High-resolution images
 
